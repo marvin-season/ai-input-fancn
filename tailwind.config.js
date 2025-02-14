@@ -1,14 +1,14 @@
-import lineClamp from '@tailwindcss/line-clamp'
-import typography from '@tailwindcss/typography'
+import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
-  content: {
-  },
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    extend: {
 
+    }
   },
 
-  plugins: [lineClamp, typography],
-}
+  plugins: [typography],
+};

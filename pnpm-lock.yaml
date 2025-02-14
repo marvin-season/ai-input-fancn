@@ -50,6 +50,9 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^2.10.4
         version: 2.11.5
+      postcss:
+        specifier: ^8.5.2
+        version: 8.5.2
       react:
         specifier: ^19.0.0
         version: 19.0.0
