@@ -21,6 +21,6 @@ export default function Editor() {
     })
 
     return <>
-        <EditorContent className="w-full h-full  editorforce" editor={editor} />
+        <EditorContent className="w-3/4 p-10 bg-white shadow rounded-[16px]" editor={editor} />
     </>
 }

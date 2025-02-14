@@ -60,21 +60,13 @@ export const useContent = (type, updateAttributes) => {
     }
   }
   const updateText = (children) => {
-    // const result = children.find((item) => {
-    //   if (item.tagName === 'SPAN' && !item.hasAttribute('contentEditable')) {
-    //     return item.textContent ? false : true
-    //   }
-    //   return false
-    // })
-
     const texts = children.map((child) => {
       const emptyText = child.getAttribute('data-empty-text-span')
       if (child.tagName === 'SPAN' && !child.hasAttribute('contentEditable')) return child.textContent || emptyText
       return ''
     })
-    // if (children.length <= 0) deleteNode()
     const content = texts.filter((text) => text).join(' ')
-    // updateAttributes({ content: result ? '' : content })
+
     updateAttributes({ content })
   }
   useEffect(() => {
