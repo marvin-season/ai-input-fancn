@@ -1,4 +1,4 @@
-import { EditorProviderProps, JSONContent, useCurrentEditor } from '@tiptap/react'
+import { EditorProviderProps, JSONContent } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
 import InlinePlaceholder from './extension/inline-placeholder'
@@ -29,7 +29,7 @@ export const useEditorProps = (content: string | JSONContent) => {
             attributes: {
                 class: 'w-full prose-sm focus:outline-none w-3/4 p-10 bg-white shadow rounded-[16px]',
             },
-            handleKeyDown: (_, event) => {
+            handleKeyDown(editorView, event) {
                 if (event.key === '@') {
                     alert('trigger @')
                     return true
@@ -37,6 +37,7 @@ export const useEditorProps = (content: string | JSONContent) => {
                 // 监听键盘事件
                 if (event.key === 'Enter' && !event.shiftKey) {
                     console.log('trigger Enter')
+                    handleSave(editorView.state.toJSON().doc)
                     return true
                 }
 
@@ -46,17 +47,6 @@ export const useEditorProps = (content: string | JSONContent) => {
     } satisfies EditorProviderProps
 }
 
-export default function Editor() {
-    const { editor } = useCurrentEditor()
-    return <>
-        <button className='py-2 px-3 rounded-lg bg-blue-400 text-white' onClick={() => {
-            const json = editor?.getJSON();
-            if (!json) {
-                return
-            }
-            console.log('result', serialize(json))
-
-            alert(`${JSON.stringify(json, null, 2)}`)
-        }}>提交</button>
-    </>
+const handleSave = (json: JSONContent) => {
+    alert(serialize(json))
 }
