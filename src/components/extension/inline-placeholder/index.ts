@@ -1,4 +1,6 @@
 import { Node, mergeAttributes } from '@tiptap/core';
+import { ReactNodeViewRenderer } from '@tiptap/react';
+import View from './view';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -24,9 +26,6 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
   addOptions() {
     return {
       HTMLAttributes: {
-        style:
-          'color: gray; font-size: 0.9em; padding: 2px 3px; margin: 0 1px; cursor: pointer;',
-        'data-type': this.name,
         class: 'inlinePlaceholder',
       },
       placeholder: '请输入内容',
@@ -43,8 +42,7 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
           element.getAttribute('data-placeholder') || '',
         renderHTML: (attributes: InlinePlaceholderAttributes) => {
           return {
-            'data-color': attributes.placeholder,
-            style: `border-bottom: 1px solid blue`,
+            'data-placeholder': attributes.placeholder,
           };
         },
       },
@@ -78,6 +76,9 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
       node.attrs.placeholder,
     ];
   },
+    addNodeView() {
+      return ReactNodeViewRenderer(View)
+    },
 });
 
 export default InlinePlaceholder;
