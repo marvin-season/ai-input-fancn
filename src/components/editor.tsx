@@ -23,7 +23,6 @@ export const useEditorProps = (content: string | JSONContent) => {
             }),
             InlinePlaceholder
         ],
-        // content: `我是 <span data-type="inlinePlaceholder" data-placeholder="张三"></span>`,
         content,
         editorProps: {
             attributes: {
