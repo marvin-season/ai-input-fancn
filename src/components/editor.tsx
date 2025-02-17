@@ -5,6 +5,7 @@ import { Markdown } from 'tiptap-markdown'
 import InlinePlaceholder from './extension/inline-placeholder'
 export default function Editor() {
     const editor = useEditor({
+        autofocus: true,
         extensions: [
             StarterKit.configure({
                 history: false,

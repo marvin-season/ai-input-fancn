@@ -1,30 +1,28 @@
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from "@tiptap/react"
-import { useState } from "react";
-
-const View = ({ node, updateAttributes }: NodeViewProps) => {
-    const { type, placeholder } = node.attrs
-    console.log('node', node)
+import { memo } from "react";
+const View = ({node, updateAttributes }: NodeViewProps) => {
+    const { type, value, placeholder } = node.attrs
     // 当输入变化时更新 value 属性
     const handleInput = (e: React.FormEvent) => {
-        const newValue = (e.target as HTMLInputElement).value || '';
-        setValue(newValue)
-        // 更新节点的 value 属性
-        updateAttributes({ value: newValue });
+        const inputElement = e.target as HTMLInputElement;
+        const newValue = inputElement.value || '';
+        console.log('newValue', newValue)
+        updateAttributes({ value: newValue })
     };
 
-    const [value, setValue] = useState('')
     return (
         <NodeViewWrapper as="span" onKeyDown={() => {
 
         }}>
             <NodeViewContent
                 as="input"
-                className="outline-none !w-['unset'] !max-w-[100px]"
+                className="outline-none"
                 contentEditable={false}
                 data-node-type={type}
-                onChange={handleInput}
+                // onChange={handleInput}
+                onInput={handleInput}
                 placeholder={placeholder}
-                value={value}
+                defaultValue={value}
             >
 
             </NodeViewContent>
@@ -32,4 +30,4 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
     )
 }
 
-export default View
+export default memo(View)

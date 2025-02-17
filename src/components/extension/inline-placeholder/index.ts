@@ -4,7 +4,8 @@ import View from './view';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
-    inlinePlaceholder: {};
+    inlinePlaceholder: {
+    };
   }
 }
 
@@ -48,7 +49,7 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
       },
       value: {
         default: '',
-        // rendered: false,
+        rendered: false,
         // 从 html 中解析 为 prosemirror 中的 state
         parseHTML: (element: HTMLElement) =>
           element.getAttribute('data-value') || '',
@@ -76,9 +77,9 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
       node.attrs.placeholder,
     ];
   },
-    addNodeView() {
-      return ReactNodeViewRenderer(View)
-    },
+  addNodeView() {
+    return ReactNodeViewRenderer(View);
+  }
 });
 
 export default InlinePlaceholder;
