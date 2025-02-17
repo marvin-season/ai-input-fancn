@@ -20,7 +20,7 @@ export default function Editor() {
             InlinePlaceholder
         ],
         // content: `我是 <span data-type="inlinePlaceholder" data-placeholder="张三"></span>`,
-        content: `我是 <span data-type="inlinePlaceholder" data-placeholder="张三"></span> , 我的工作是 <span data-type="inlinePlaceholder" data-placeholder="开发"></span>`,
+        content: `我是 <span data-type="inlinePlaceholder" data-placeholder="宫本武藏"></span> , 我的工作是 <span data-type="inlinePlaceholder" data-placeholder="吃饭睡觉打拳击"></span>`,
         editorProps: {
             attributes: {
               class: 'prose-sm focus:outline-none',

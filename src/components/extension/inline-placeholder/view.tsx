@@ -1,6 +1,14 @@
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from "@tiptap/react"
 import { memo } from "react";
-const View = ({node, updateAttributes }: NodeViewProps) => {
+const caculteWidth = (value: string) => {
+    // 如果是英文的话，一个字符占用 0.5rem，中文占用 1rem
+    // 英文的个数
+    const englishCount = value.replace(/[\u4e00-\u9fa5]/g, '').length
+    // 中文的个数
+    const chineseCount = value.length - englishCount
+    return englishCount * 0.5 + chineseCount * 0.9
+}
+const View = ({ node, updateAttributes }: NodeViewProps) => {
     const { type, value, placeholder } = node.attrs
     // 当输入变化时更新 value 属性
     const handleInput = (e: React.FormEvent) => {
@@ -10,13 +18,14 @@ const View = ({node, updateAttributes }: NodeViewProps) => {
         updateAttributes({ value: newValue })
     };
 
-    return (
-        <NodeViewWrapper as="span" onKeyDown={() => {
+    const count = caculteWidth(value ? value : placeholder)
 
-        }}>
+    return (
+        <NodeViewWrapper as="span">
             <NodeViewContent
                 as="input"
-                className="outline-none"
+                style={{ width: `${count}rem` }}
+                className={`outline-none`}
                 contentEditable={false}
                 data-node-type={type}
                 // onChange={handleInput}
