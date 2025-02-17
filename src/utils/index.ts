@@ -20,7 +20,7 @@ export function deserialize(input: string) {
       break;
     }
 
-    const [full, value] = match;
+    const [_full, value] = match;
 
     // 添加占位符前的普通文本
     if (lastIndex < match.index) {
@@ -51,6 +51,30 @@ export function deserialize(input: string) {
         content,
       },
     ],
-  } satisfies JSONContent;
+  } as JSONContent;
 }
-export const serialize = (str: string) => {};
+export const serialize = (json: JSONContent) => {
+  let result = '';
+
+  // 遍历 content 数组
+  json.content?.forEach((block) => {
+    if (block.type === 'paragraph') {
+      block.content?.forEach((node) => {
+        if (node.type === 'text') {
+          // 普通文本直接拼接
+          result += node.text;
+        } else if (node.type === 'inlinePlaceholder') {
+          // 占位符拼接为 {{...}} 格式
+          const { placeholder, value } = node.attrs!;
+          if (value) {
+            result += value;
+          } else {
+            result += `{{${placeholder}}}`;
+          }
+        }
+      });
+    }
+  });
+
+  return result;
+};

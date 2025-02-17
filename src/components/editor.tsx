@@ -1,9 +1,10 @@
-import { EditorProviderProps, useCurrentEditor } from '@tiptap/react'
+import { EditorProviderProps, JSONContent, useCurrentEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
 import InlinePlaceholder from './extension/inline-placeholder'
+import { serialize } from '../utils'
 
-export const useEditorProps = (content: string) => {
+export const useEditorProps = (content: string | JSONContent) => {
     return {
         editorContainerProps: {
             className: 'w-full',
@@ -50,7 +51,11 @@ export default function Editor() {
     return <>
         <button className='py-2 px-3 rounded-lg bg-blue-400 text-white' onClick={() => {
             const json = editor?.getJSON();
-            console.log('json', json)
+            if (!json) {
+                return
+            }
+            console.log('result', serialize(json))
+
             alert(`${JSON.stringify(json, null, 2)}`)
         }}>提交</button>
     </>
