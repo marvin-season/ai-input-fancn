@@ -1,5 +1,6 @@
 export const SWITCH_TYPE_TEMPLATE = (label) => ({
-
+  // load form api or local storage
+  dynamic: jsxFactory("姓名是{{姓名}}，年龄是{{年龄}}"),
   workprogress: (
     <>
       <span>作为一位</span>
@@ -21,3 +22,20 @@ export const SWITCH_TYPE_TEMPLATE = (label) => ({
     </>
   ),
 })
+
+export const jsxFactory = (text) => {
+  const arr = text.split(/{{|}}/)
+  return arr.map((item, index) => {
+    if (index % 2 === 0) {
+      return <span key={index}>{item}</span>
+    } else {
+      return (
+        <span
+          data-empty-text-span={item}
+          key={item}
+          className="min-w-[40px] inline-block px-1 border-b border-blue-500 pb-1  outline-none mx-1 lastnotdeleted leading-4"
+        ></span>
+      )
+    }
+  })
+}

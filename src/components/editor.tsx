@@ -17,7 +17,7 @@ export default function Editor() {
             }),
             Template
         ],
-        content: `<custom-inline type="workprogress" label="工作进展"></custom-inline>`,
+        content: `<custom-inline type="dynamic" label="工作进展"></custom-inline>`,
         editorProps: {
             attributes: {
               class: 'prose-sm focus:outline-none',
