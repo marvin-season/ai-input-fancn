@@ -22,6 +22,19 @@ export default function Editor() {
             attributes: {
               class: 'prose-sm focus:outline-none',
             },
+            handleKeyDown: (view, event) => {
+                if (event.key === '@') {
+                  alert('trigger @')
+                  return true
+                }
+                // 监听键盘事件
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    console.log('trigger Enter')
+                  return true
+                }
+        
+                return false // 返回 false 不拦截事件
+              },
         },
     })
 
