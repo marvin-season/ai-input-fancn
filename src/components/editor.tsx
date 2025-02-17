@@ -3,7 +3,7 @@ import { StarterKit } from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
 import InlinePlaceholder from './extension/inline-placeholder'
 
-export const useEditorProps = () => {
+export const useEditorProps = (content: string) => {
     return {
         editorContainerProps: {
             className: 'w-full',
@@ -23,7 +23,7 @@ export const useEditorProps = () => {
             InlinePlaceholder
         ],
         // content: `我是 <span data-type="inlinePlaceholder" data-placeholder="张三"></span>`,
-        content: `我是 <span data-type="inlinePlaceholder" data-placeholder="宫本武藏"></span> , 我的工作是 <span data-type="inlinePlaceholder" data-placeholder="吃饭睡觉打拳击"></span>`,
+        content,
         editorProps: {
             attributes: {
                 class: 'w-full prose-sm focus:outline-none w-3/4 p-10 bg-white shadow rounded-[16px]',
