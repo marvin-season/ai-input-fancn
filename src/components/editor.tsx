@@ -1,7 +1,8 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
-import Template from './extension/template'
+// import Template from './extension/template'
+import InlinePlaceholder from './extension/inline-placeholder'
 export default function Editor() {
     const editor = useEditor({
         extensions: [
@@ -15,9 +16,9 @@ export default function Editor() {
                 breaks: true,
                 linkify: true,
             }),
-            Template
+            InlinePlaceholder
         ],
-        content: `<custom-inline type="dynamic" label="工作进展"></custom-inline>`,
+        content: `我是 <span data-type="inlinePlaceholder" data-placeholder="张三"></span> , 我的工作是 <span data-type="inlinePlaceholder" data-placeholder="开发"></span>`,
         editorProps: {
             attributes: {
               class: 'prose-sm focus:outline-none',
