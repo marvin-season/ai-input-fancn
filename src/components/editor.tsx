@@ -42,6 +42,11 @@ export default function Editor() {
     })
 
     return <>
+        <button className='py-2 px-3 rounded-lg bg-blue-400 text-white' onClick={() => {
+            const json = editor?.getJSON();
+            console.log('json', json)
+            alert(`${JSON.stringify(json, null, 2)}`)
+        }}>提交</button>
         <EditorContent className="w-3/4 p-10 bg-white shadow rounded-[16px]" editor={editor} />
     </>
 }
