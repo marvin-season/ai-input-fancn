@@ -8,14 +8,18 @@ const caculteWidth = (value: string) => {
     const chineseCount = value.length - englishCount
     return englishCount * 0.5 + chineseCount * 0.9
 }
+
+let timer: number | null = null;
 const View = ({ node, updateAttributes }: NodeViewProps) => {
     const { type, value, placeholder } = node.attrs
     // 当输入变化时更新 value 属性
     const handleInput = (e: React.FormEvent) => {
         const inputElement = e.target as HTMLInputElement;
         const newValue = inputElement.value || '';
-        console.log('newValue', newValue)
-        updateAttributes({ value: newValue })
+        timer && clearTimeout(timer);
+        timer = setTimeout(() => {
+            updateAttributes({ value: newValue })
+        }, 200);
     };
 
     const count = caculteWidth(value ? value : placeholder);
@@ -28,7 +32,6 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
                 className={`outline-none border-b border-blue-500 mx-2 box-border text-gray-500`}
                 contentEditable={false}
                 data-node-type={type}
-                // onChange={handleInput}
                 onInput={handleInput}
                 placeholder={placeholder}
                 defaultValue={value}
