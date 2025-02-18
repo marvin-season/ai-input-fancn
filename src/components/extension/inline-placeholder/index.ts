@@ -74,7 +74,7 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
     return [
       'span',
       mergeAttributes(this.options.HTMLAttributes || {}, HTMLAttributes),
-      node.attrs.placeholder,
+      0,
     ];
   },
   addNodeView() {
